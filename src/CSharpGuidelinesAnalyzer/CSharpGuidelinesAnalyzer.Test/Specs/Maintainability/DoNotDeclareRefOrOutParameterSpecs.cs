@@ -9,7 +9,7 @@ namespace CSharpGuidelinesAnalyzer.Test.Specs.Maintainability
 {
     public sealed class DoNotDeclareRefOrOutParameterSpecs : CSharpGuidelinesAnalysisTestFixture
     {
-        protected override string DiagnosticId => DoNotDeclareRefOrOutParameterAnalyzer.DiagnosticId;
+        protected override string DiagnosticId => DoNotDeclareRefParameterAnalyzer.DiagnosticId;
 
         [Fact]
         internal void When_method_parameter_has_no_modifier_it_must_be_skipped()
@@ -472,7 +472,7 @@ namespace CSharpGuidelinesAnalyzer.Test.Specs.Maintainability
 
         protected override DiagnosticAnalyzer CreateAnalyzer()
         {
-            return new DoNotDeclareRefOrOutParameterAnalyzer();
+            return new DoNotDeclareRefParameterAnalyzer();
         }
     }
 }

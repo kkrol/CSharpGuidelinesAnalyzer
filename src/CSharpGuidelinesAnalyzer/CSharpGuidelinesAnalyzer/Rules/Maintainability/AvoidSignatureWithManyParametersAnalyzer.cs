@@ -13,10 +13,10 @@ namespace CSharpGuidelinesAnalyzer.Rules.Maintainability
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class AvoidSignatureWithManyParametersAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "AV1561";
+        public const string DiagnosticId = "CSS1561";
 
-        private const int MaxParameterCount = 3;
-        private const string MaxParameterCountText = "3";
+        private const int MaxParameterCount = 5;
+        private const string MaxParameterCountText = "5";
 
         private const string Title = "Signature contains more than " + MaxParameterCountText + " parameters";
 

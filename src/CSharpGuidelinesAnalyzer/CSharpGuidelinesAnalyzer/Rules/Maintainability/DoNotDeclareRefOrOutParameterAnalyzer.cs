@@ -9,13 +9,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace CSharpGuidelinesAnalyzer.Rules.Maintainability
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DoNotDeclareRefOrOutParameterAnalyzer : DiagnosticAnalyzer
+    public sealed class DoNotDeclareRefParameterAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "AV1562";
+        public const string DiagnosticId = "CSS1562";
 
-        private const string Title = "Do not declare a parameter as ref or out";
-        private const string MessageFormat = "Parameter '{0}' is declared as ref or out.";
-        private const string Description = "Don't use ref or out parameters.";
+        private const string Title = "Do not declare a parameter as ref";
+        private const string MessageFormat = "Parameter '{0}' is declared as ref.";
+        private const string Description = "Don't use ref parameters.";
 
         [NotNull]
         private static readonly AnalyzerCategory Category = AnalyzerCategory.Maintainability;
@@ -48,7 +48,7 @@ namespace CSharpGuidelinesAnalyzer.Rules.Maintainability
                 return;
             }
 
-            if (!IsRefOrOutParameter(parameter) || IsOutParameterInTryMethod(parameter))
+            if (!IsRefParameter(parameter))
             {
                 return;
             }
@@ -56,17 +56,11 @@ namespace CSharpGuidelinesAnalyzer.Rules.Maintainability
             AnalyzeRefParameter(parameter, context);
         }
 
-        private static bool IsRefOrOutParameter([NotNull] IParameterSymbol parameter)
+        private static bool IsRefParameter([NotNull] IParameterSymbol parameter)
         {
-            return parameter.RefKind == RefKind.Ref || parameter.RefKind == RefKind.Out;
+            return parameter.RefKind == RefKind.Ref;
         }
-
-        private static bool IsOutParameterInTryMethod([NotNull] IParameterSymbol parameter)
-        {
-            return parameter.RefKind == RefKind.Out && parameter.ContainingSymbol is IMethodSymbol method &&
-                method.Name.StartsWith("Try", StringComparison.Ordinal);
-        }
-
+         
         private static void AnalyzeRefParameter([NotNull] IParameterSymbol parameter, SymbolAnalysisContext context)
         {
             ISymbol containingMember = parameter.ContainingSymbol;

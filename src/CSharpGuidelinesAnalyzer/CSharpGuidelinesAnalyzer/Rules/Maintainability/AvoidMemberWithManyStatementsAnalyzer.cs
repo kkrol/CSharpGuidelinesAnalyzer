@@ -14,10 +14,10 @@ namespace CSharpGuidelinesAnalyzer.Rules.Maintainability
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class AvoidMemberWithManyStatementsAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "AV1500";
+        public const string DiagnosticId = "CSS1500";
 
-        private const int MaxStatementCount = 7;
-        private const string MaxStatementCountText = "7";
+        private const int MaxStatementCount = 15;
+        private const string MaxStatementCountText = "15";
 
         private const string Title = "Member or local function contains more than " + MaxStatementCountText + " statements";
 
